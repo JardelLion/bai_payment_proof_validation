@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_bai_receipt_tree" model="ir.ui.view">
+        <field name="name">bai.receipt.tree</field>
+        <field name="model">bai.receipt</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="key"/>
+                <field name="pin"/>
+                <field name="name"/>
+                <field name="account"/>
+                <field name="amount"/>
+                <field name="data_movement"/>
+                <field name="operation_number"/>
+                <field name="movement_type"/>
+            </list>
+        </field>
+    </record>
+     <!-- Action: ONLY tree view -->
+    <record id="action_bai_receipts_list" model="ir.actions.act_window">
+        <field name="name">BAI Receipts</field>
+        <field name="res_model">bai.receipt</field>
+        <field name="view_mode">list</field>
+    </record>
+
+     <!-- Menu under parent -->
+    <menuitem id="menu_bai_receipts" name="BAI Receipts" parent="privacy_lookup.privacy_menu" sequence="20"/>
+
+    <!-- List menu (opens tree view only) -->
+    <menuitem id="menu_bai_receipts_list" name="Receipts" parent="menu_bai_receipts" action="action_bai_receipts_list" sequence="10"/>
+
+
+</odoo>
