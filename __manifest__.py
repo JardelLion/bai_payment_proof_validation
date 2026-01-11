@@ -1,16 +1,22 @@
 {
     'name': 'BAI Payment Validation',
-    'version': '1.0',
+    'version': '1.1',
     'summary': 'Summary Bai payment validation',
     'description': """ """,
     'author': 'Jardel Elias Bernardo',
     'website': 'https://github.com/JardelLion',
-    'depends': ['purchase', 'sale_management'],
+    'depends': ['purchase', 'sale_management', 'website_sale'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_config_settings_views.xml',
-        'views/bai_receipt_views.xml'
+        'views/bai_receipt_views.xml',
+        'views/website_sale_template.xml'
     ],
+    'assets': {
+        "web.assets_frontend": [
+            '/bai_payment_proof_validation/static/src/js/main.js'
+        
+        ]},
 
    # "images": "static/description/icon.svg",
     'installable': True,

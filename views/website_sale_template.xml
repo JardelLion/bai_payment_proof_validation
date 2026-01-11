@@ -1,0 +1,63 @@
+<odoo>
+    <template id="website_sale_confirmation_inherit_attachment_upload"
+              inherit_id="website_sale.confirmation">
+
+        <xpath expr="//div[@id='oe_structure_website_sale_confirmation_2']"
+               position="after">
+
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body js_bai_upload_form">
+                         <t t-if="order.bai_receipt_state == 'bai_valid'">
+                            <ul class="mt-2">
+                                 <li><strong>Estado:</strong>Comprovativo BAI Enviado</li>
+                                <li><strong>Número de Operação:</strong> <t t-esc="order.bai_receipt_id.operation_number"/></li>
+                                <li><strong>Montante:</strong> <t t-esc="order.bai_receipt_id.amount"/></li>
+                                <li><strong>Movimento:</strong> <t t-esc="order.bai_receipt_id.movement_desc"/></li>
+                                <li><strong>Data:</strong> <t t-esc="order.bai_receipt_id.data_movement"/></li>
+                            </ul>
+                        </t>
+
+                        <t t-elif="order.bai_receipt_state == 'not_valid'">
+                             <ul class="mt-2">
+                                 <li><strong>Estado:</strong>Comprovativo Inválido</li>
+                            </ul>
+                        </t>
+
+                        <t t-elif="order.bai_receipt_state == 'other_bank'">
+                             <ul class="mt-2">
+                                 <li><strong>Estado:</strong>Comprovativo Enviado</li>
+                            </ul>
+                        </t>
+                        <t t-else="">
+                            <h5 class="mb-3">Anexar comprovativo (PDF)</h5>
+                            <form action="/shop/confirmation/upload_attachment" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="order_id" t-att-value="order.id"/>
+                                <div class="form-group mb-3 js_bank_block"
+                                     data-input-type="bank_select">
+                                    <label class="form-label">Selecione o Banco</label>
+                                    <select name="bank_selected" class="form-select js_bank_select" required="required">
+                                        <option value="">Escolha um banco</option>
+                                        <option value="bai">BAI</option>
+                                        <option value="other">Outro Banco</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3 js_pdf_block d-none" data-input-type="pdf_upload">
+                                    <input type="file" name="attachment" accept="application/pdf" class="form-control"/>
+                                </div>
+                                <button type="submit"
+                                        class="btn btn-primary js_submit_btn d-none">
+                                    Enviar comprovativo
+                                </button>
+                            </form>
+
+                        </t>
+
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>

@@ -15,7 +15,7 @@ class BaiReceipt(models.Model):
     iban = fields.Char("IBAN")
     movement_desc = fields.Char("Movement Description")
     data_movement = fields.Datetime("Movement Date")
-    amount = fields.Float("Amount")
+    amount = fields.Char("Amount")
     operation_number = fields.Char("Operation Number")
     movement_type = fields.Char("Movement Type")
     processed_on = fields.Datetime("Processed On")
