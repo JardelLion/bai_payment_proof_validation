@@ -45,6 +45,7 @@ O módulo é projetado para fornecer uma experiência **clara, segura e confiáv
 1. Copie o módulo para a pasta `addons` do seu Odoo.
 2. Atualize a lista de módulos no backend.
 3. Instale o módulo via **Apps**.
+4. No backend do Odoo, vá para Faturação → Configurações → Métodos de Pagamento e ative os Payment Providers necessários, incluindo Transferência Bancária / Bank Transfer.
 ---
 
 ## Uso

@@ -1,11 +1,11 @@
 {
     'name': 'BAI Payment Validation',
-    'version': '1.1',
+    'version': '1.2',
     'summary': 'Summary Bai payment validation',
     'description': """ """,
     'author': 'Jardel Elias Bernardo',
     'website': 'https://github.com/JardelLion',
-    'depends': ['purchase', 'sale_management', 'website_sale'],
+    'depends': ['sale_management', 'website_sale'],
     'data': [
         'security/ir.model.access.csv',
        # 'views/res_config_settings_views.xml',
