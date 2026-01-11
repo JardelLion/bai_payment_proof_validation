@@ -89,8 +89,3 @@ O módulo é projetado para fornecer uma experiência **clara, segura e confiáv
 - Contribuir com integração com outros bancos se necessário.
 
 ---
-
-## Licença
-
-- MIT License (ou a licença do seu projeto Odoo atual).
-
