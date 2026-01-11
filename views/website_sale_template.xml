@@ -9,28 +9,67 @@
                 <div class="card">
                     <div class="card-body js_bai_upload_form">
                          <t t-if="order.bai_receipt_state == 'bai_valid'">
-                            <ul class="mt-2">
-                                 <li><strong>Estado:</strong>Comprovativo BAI Enviado</li>
-                                <li><strong>Número de Operação:</strong> <t t-esc="order.bai_receipt_id.operation_number"/></li>
-                                <li><strong>Montante:</strong> <t t-esc="order.bai_receipt_id.amount"/></li>
-                                <li><strong>Movimento:</strong> <t t-esc="order.bai_receipt_id.movement_desc"/></li>
-                                <li><strong>Data:</strong> <t t-esc="order.bai_receipt_id.data_movement"/></li>
-                            </ul>
-                        </t>
+                            <div class="alert alert-success mt-2">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa fa-check-circle me-3 fs-5" aria-hidden="true"/>
+                                    <strong>Comprovativo validado pelo BAI</strong>
+                                </div>
+                                <p class="mb-2">
+                                    O comprovativo submetido foi validado com sucesso através da
+                                    integração automática com o Banco Angolano de Investimentos (BAI).
+                                </p>
 
+                                <ul class="mb-0 ps-3">
+                                    <li>
+                                        <strong>Número de Operação:</strong>
+                                        <t t-esc="order.bai_receipt_id.operation_number"/>
+                                    </li>
+                                    <li>
+                                        <strong>Montante:</strong>
+                                        <t t-esc="order.bai_receipt_id.amount"/>
+                                    </li>
+                                    <li>
+                                        <strong>Movimento:</strong>
+                                        <t t-esc="order.bai_receipt_id.movement_desc"/>
+                                    </li>
+                                    <li>
+                                        <strong>Data da Operação:</strong>
+                                        <t t-esc="order.bai_receipt_id.data_movement"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </t>
                         <t t-elif="order.bai_receipt_state == 'not_valid'">
-                             <ul class="mt-2">
-                                 <li><strong>Estado:</strong>Comprovativo Inválido</li>
-                            </ul>
+                            <div class="alert alert-danger mt-2">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-times-circle me-3 fs-3" aria-hidden="true"/>
+                                    <div>
+                                        <p class="mb-1">
+                                            O comprovativo selecionado não pertence ao
+                                            <strong>BAI</strong>.
+                                        </p>
+                                        <p class="mb-0">
+                                            Por favor, selecione novamente o ficheiro correto.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </t>
 
                         <t t-elif="order.bai_receipt_state == 'other_bank'">
-                             <ul class="mt-2">
-                                 <li><strong>Estado:</strong>Comprovativo Enviado</li>
-                            </ul>
+                            <div class="alert alert-success d-flex align-items-center mt-2">
+                                <i class="fa fa-check-circle me-3 fs-5" aria-hidden="true"/>
+                                <div>
+                                    <strong>Comprovativo recebido com sucesso</strong><br/>
+                                    O seu comprovativo foi submetido e será analisado em breve.
+                                </div>
+                            </div>
+
                         </t>
-                        <t t-else="">
-                            <h5 class="mb-3">Anexar comprovativo (PDF)</h5>
+                        <t t-if="order.bai_receipt_state in ['draft', 'not_valid']">
+                            <t t-if="order.bai_receipt_state != 'not_valid'">
+                                <h5 class="mb-3">Anexar comprovativo (PDF)</h5>
+                            </t>
                             <form action="/shop/confirmation/upload_attachment" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                 <input type="hidden" name="order_id" t-att-value="order.id"/>
@@ -44,7 +83,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group mb-3 js_pdf_block d-none" data-input-type="pdf_upload">
-                                    <input type="file" name="attachment" accept="application/pdf" class="form-control"/>
+                                    <input type="file" name="attachment" accept="application/pdf" class="form-control" placeholder="Comprovativo/pdf"/>
                                 </div>
                                 <button type="submit"
                                         class="btn btn-primary js_submit_btn d-none">
