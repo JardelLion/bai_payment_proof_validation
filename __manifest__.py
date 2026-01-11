@@ -8,7 +8,7 @@
     'depends': ['purchase', 'sale_management', 'website_sale'],
     'data': [
         'security/ir.model.access.csv',
-        'views/res_config_settings_views.xml',
+       # 'views/res_config_settings_views.xml',
         'views/bai_receipt_views.xml',
         'views/website_sale_template.xml'
     ],
